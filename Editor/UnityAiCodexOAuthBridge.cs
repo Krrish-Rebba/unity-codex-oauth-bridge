@@ -851,6 +851,28 @@ namespace UnityAiCodexOAuthBridge.Editor
 
         static string FindInstalledCodexExecutable()
         {
+            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var localOpenAiDir = Path.Combine(localAppData, "OpenAI", "Codex", "bin");
+            try
+            {
+                if (Directory.Exists(localOpenAiDir))
+                {
+                    foreach (var dir in Directory.GetDirectories(localOpenAiDir))
+                    {
+                        var exe = Path.Combine(dir, "codex.exe");
+                        if (File.Exists(exe))
+                            return exe;
+
+                        var extensionless = Path.Combine(dir, "codex");
+                        if (File.Exists(extensionless))
+                            return extensionless;
+                    }
+                }
+            }
+            catch
+            {
+            }
+
             var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
             var windowsApps = Path.Combine(programFiles, "WindowsApps");
 

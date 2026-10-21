@@ -20,11 +20,18 @@ Install or open Codex, then run setup again. The bridge searches:
 
 - `PATH`
 - `%LOCALAPPDATA%\Microsoft\WindowsApps\codex.exe`
+- `%LOCALAPPDATA%\OpenAI\Codex\bin\*\codex.exe`
 - `C:\Program Files\WindowsApps\OpenAI.Codex_*\app\resources\codex.exe`
 
 ## Codex Not Logged In
 
 Setup opens `codex login` in PowerShell. Complete the browser sign-in and return to Unity.
+
+## `Session startup timed out waiting for initialization`
+
+If switching to Codex while an older chat was already open in the Assistant window, Unity attempts to resume the previous chat session ID (`session/load`), which fails if that session does not exist in the Codex ACP process (`Resource not found`).
+
+Click the **`New`** button in the top-left corner of the Assistant window to start a fresh chat session.
 
 ## `No Unity Editor instances found` or `instance_count: 0`
 
