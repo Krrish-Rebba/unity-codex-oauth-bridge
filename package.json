@@ -8,6 +8,10 @@
     "name": "Alper"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Krrish-Rebba/unity-codex-oauth-bridge.git"
+  },
   "keywords": [
     "unity",
     "ai",
