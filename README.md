@@ -6,9 +6,9 @@ This package patches the local Unity AI Assistant relay metadata so Unity's Code
 
 ## Status
 
-- Version: `0.1.1`
+- Version: `0.2.0`
 - Platform: Windows only
-- Tested targets: Unity AI Assistant `2.7.0-pre.1` and `2.7.0-pre.3` on Unity 6.4
+- Tested targets: Unity AI Assistant `2.7.0-pre.1`, `2.7.0-pre.3`, and `2.17.0-pre.1` on Unity 6.4
 - License: MIT
 
 This is an unofficial bridge. It is not affiliated with Unity or OpenAI.

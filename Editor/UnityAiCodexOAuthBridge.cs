@@ -18,7 +18,7 @@ namespace UnityAiCodexOAuthBridge.Editor
         const string LogPrefix = "[Unity AI Codex OAuth Bridge]";
         const string MenuRoot = "Tools/Unity AI Codex OAuth/";
         const string AssistantPackageName = "com.unity.ai.assistant";
-        const string SupportedAssistantVersionsText = "2.7.0-pre.1, 2.7.0-pre.3";
+        const string SupportedAssistantVersionsText = "2.7.0-pre.1, 2.7.0-pre.3, 2.17.0-pre.1";
         const string RelayExecutableName = "relay_win.exe";
         const string BackupExtension = ".codex-oauth-backup";
         const string ProviderId = "codex";
@@ -52,11 +52,21 @@ namespace UnityAiCodexOAuthBridge.Editor
         const string PatchedCodexProviderLiteralPre3 =
             "yk={id:\"codex\",displayName:\"Codex\",envVarNames:[],keychainEnvVar:[],importEnv:[],helpText:\"Uses Codex ChatGPT OAuth\",startupTroubleshootingHint:\"Run Setup Codex OAuth from the Unity Tools menu.\",isCustom:!0,agentsMdFilename:\"AGENTS.md\",postInstall:null,start:Od,onBeforeCredentialStore:void 0}});";
 
+        // Unity AI Assistant 2.17.0-pre.1 bundled relay Codex provider literal.
+        // NOTE: This version uses actual newline bytes (0x0A) inside the JS template literal,
+        // unlike 2.7.0-pre.1/pre.3 which use the escaped \n sequence (0x5C 0x6E).
+        const string OriginalCodexProviderLiteralPre217 =
+            "SS={id:\"codex\",displayName:\"Codex\",envVarNames:[\"OPENAI_API_KEY\"],keychainEnvVar:[\"OPENAI_API_KEY\"],importEnv:[\"OPENAI_*\"],helpText:\"Requires OPENAI_API_KEY\",startupTroubleshootingHint:\"Ensure OPENAI_API_KEY environment variable is set in the <link=open-gateway-preferences><color=#7BAEFA>Gateway preferences</color></link>.\",isCustom:!0,agentsMdFilename:\"AGENTS.md\",postInstall:{message:`To use Codex, you need to add an API key. Follow these steps:\n- Create one by visiting <a href=\"https://platform.openai.com/api-keys\">OpenAI's settings</a>\n- Paste your API key below and hit enter to start using the agent`,envVarName:\"OPENAI_API_KEY\"},start:Ca,onBeforeCredentialStore:(v)=>{if(v===\"OPENAI_API_KEY\")iP4()}}});";
+
+        const string PatchedCodexProviderLiteralPre217 =
+            "SS={id:\"codex\",displayName:\"Codex\",envVarNames:[],keychainEnvVar:[],importEnv:[],helpText:\"Uses Codex ChatGPT OAuth\",startupTroubleshootingHint:\"Run Setup Codex OAuth from the Unity Tools menu.\",isCustom:!0,agentsMdFilename:\"AGENTS.md\",postInstall:null,start:Ca,onBeforeCredentialStore:void 0}});";
+
         static readonly Encoding Utf8 = new UTF8Encoding(false);
         static readonly RelayPatchSignature[] RelayPatchSignatures =
         {
             new RelayPatchSignature("2.7.0-pre.1", OriginalCodexProviderLiteralPre1, PatchedCodexProviderLiteralPre1),
-            new RelayPatchSignature("2.7.0-pre.3", OriginalCodexProviderLiteralPre3, PatchedCodexProviderLiteralPre3)
+            new RelayPatchSignature("2.7.0-pre.3", OriginalCodexProviderLiteralPre3, PatchedCodexProviderLiteralPre3),
+            new RelayPatchSignature("2.17.0-pre.1", OriginalCodexProviderLiteralPre217, PatchedCodexProviderLiteralPre217)
         };
 
         static double s_LoginPollStartedAt;
