@@ -24,7 +24,7 @@ namespace UnityAiCodexOAuthBridge.Editor
         const string ProviderId = "codex";
         const string PatchedHelpText = "Uses Codex ChatGPT OAuth";
         const string GatewayPrefsKey = "Unity.AI.Gateway.Relay.envVars.preferences";
-        const string DefaultCodexModelId = "gpt-5.5";
+        const string DefaultCodexModelId = "gpt-5.6-terra";
         const string SelectedModelPrefsPrefix = "AIAssistant.SelectedModel.";
         const string ProviderEnabledPrefsPrefix = "AIAssistant.ProviderEnabled.";
         const string GatewayDisclaimerAcceptedPrefsPrefix = "AIAssistant.AiGatewayDisclaimerAccepted.";
@@ -754,7 +754,9 @@ namespace UnityAiCodexOAuthBridge.Editor
                         continue;
 
                     var value = trimmed.Substring(equals + 1).Trim().Trim('"', '\'');
-                    return string.IsNullOrWhiteSpace(value) ? null : value;
+                    if (string.IsNullOrWhiteSpace(value) || value.IndexOf("luna", StringComparison.OrdinalIgnoreCase) >= 0)
+                        return null;
+                    return value;
                 }
             }
             catch
